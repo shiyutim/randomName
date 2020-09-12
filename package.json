@@ -1,0 +1,12 @@
+{
+  "name": "randomName",
+  "version": "1.0.0",
+  "description": "起源：在使用了某 xx 软件的随机名几次后，发现了一个简单的名字规则，就是 `xx的xx`，所以我基于这个规则写了这个玩玩。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
