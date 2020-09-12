@@ -9,7 +9,7 @@ class RandomName {
 		options = {
 			gender: 1, // 1 为男，0 为女
 			repeat: {
-				position: "before", // 重复了在前面提示文字或者后面提示文字 `before` `behind`
+				position: "before", // 重复了在前面提示文字或者后面提示文字 `before` `after`
 				content: "重复-",
 			},
 		}
@@ -42,7 +42,7 @@ class RandomName {
 			let repeatName
 			if (this.repeat.position === "before") {
 				repeatName = `${this.repeat.content}${name}`
-			} else if (this.repeat.position === "behind") {
+			} else if (this.repeat.position === "after") {
 				repeatName = `${name}${this.repeat.content}`
 			} else {
 				repeatName = `${this.repeat.content}${name}`
