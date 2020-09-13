@@ -23,11 +23,28 @@ class RandomName {
 	}
 
 	sendName(first, last) {
-		const firstName = this.gender === 1 ? desListBoy[first] : desListGirl[first]
-		const lastName = this.gender === 1 ? nounBoy[last] : nounGirl[last]
+		const firstName = this.gender ? desListBoy[first] : desListGirl[first]
+		const lastName = this.gender ? nounBoy[last] : nounGirl[last]
 		const name = `${firstName}${this.centerName}${lastName}`
 
 		return name
+	}
+
+	getRepeatName(name) {
+		if (!name) throw new Error("name is not defined")
+
+		let repeatName
+		const { position, content } = this.repeat
+
+		if (position === "before") {
+			repeatName = `${content}${name}`
+		} else if (position === "after") {
+			repeatName = `${name}${content}`
+		} else {
+			repeatName = `${content}${name}`
+		}
+
+		return repeatName
 	}
 
 	getName() {
@@ -39,27 +56,17 @@ class RandomName {
 		if (range === 0) return ""
 
 		if (this.appear.flat(Infinity).length >= range) {
-			let repeatName
-			if (this.repeat.position === "before") {
-				repeatName = `${this.repeat.content}${name}`
-			} else if (this.repeat.position === "after") {
-				repeatName = `${name}${this.repeat.content}`
-			} else {
-				repeatName = `${this.repeat.content}${name}`
-			}
-			return repeatName
+			return this.getRepeatName(name)
 		}
+
 		const firstList = this.appear[firstCount]
 
-		if (firstList && firstList.includes(lastCount)) {
-			return this.getName()
+		if (firstList) {
+			if (firstList.includes(lastCount)) return this.getName()
+			this.appear[firstCount].push(lastCount)
 		} else {
-			if (firstList) {
-				this.appear[firstCount].push(lastCount)
-			} else {
-				this.appear[firstCount] = []
-				this.appear[firstCount].push(lastCount)
-			}
+			this.appear[firstCount] = []
+			this.appear[firstCount].push(lastCount)
 		}
 
 		return name
@@ -72,8 +79,8 @@ class RandomName {
 
 	getLength(status) {
 		// status: `des` or `noun`
-		const { length: desL } = this.gender === 1 ? desListBoy : desListGirl
-		const { length: nounL } = this.gender === 1 ? nounBoy : nounGirl
+		const { length: desL } = this.gender ? desListBoy : desListGirl
+		const { length: nounL } = this.gender ? nounBoy : nounGirl
 		return status === "des" ? desL : nounL
 	}
 

@@ -4,6 +4,18 @@
 
 ## 用法
 
+目前更新的词库列表：
+
+```
+男性列表
+["潇洒", "开心", "聪明", "迷人", "细心", "耿直", "坐怀不乱", "谦虚", "热情"]
+["帅哥", "高富帅", "马屁精", "癞皮狗"]
+
+女性列表
+["贤惠", "谦虚", "婀娜多姿"]
+["美女", "白富美"]
+```
+
 ```js
 import RandomName from "index"
 let name = new RandomName()
@@ -35,7 +47,11 @@ for (let i = 0; i < 10; i++) {
 ```
 例：
 let name = new RandomName({
-    gender: 1
+    gender: 1,
+    repeat: {
+        position: 'before'
+        content: '重复-'
+    }
 })
 ```
 
